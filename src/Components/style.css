@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+* {
+	padding: 0;
+	margin: 0;
+	font-family: "Poppins", sans-serif;
+}
+
+/* Özel belirtmek istediğimiz css kuralları, :root içine yazılabilir, iki tire koyarak root içinde global bir değişken tanımlanır, :root olduğu için tüm htmlde geçerlidir
+*/
+:root {
+	--primary-color: #f5edce;
+	--secondary-color: #89c4e1;
+	--tertiary-color: #58287f;
+	--quaternary-color: #1a0000;
+}
+
+body {
+	background-color: var(--primary-color);
+}
+.header {
+	background-color: var(--secondary-color);
+	height: 100px;
+	width: 100%;
+	display: flex;
+	/* flex yapısı ile kapsayıcıya ve içindeki öğelere bir esneklik gelir. Flex yapısı altında hem kapsayıcı için hemde içindeki öğeler için birden fazla flex özelliği bulunur. */
+	justify-content: space-around; /* flex yapılarını merkeze sabitleme, space around öncesine arasına ve sonrasına boşluk bırakır*/
+	align-items: center;
+	margin-bottom: 30px;
+}
+nav ul {
+	display: flex;
+}
+nav ul li {
+	list-style: none;
+	margin-right: 1rem; /*1rem=16px*/
+}
+nav ul li a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0.2rem 0.6rem;
+	position: relative;
+}
+nav ul li a::before {
+	/* Her a içeriğinden önce olması gerekenler*/
+	content: "";
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	height: 3px;
+	width: 0;
+	transform: translateX(-50%);
+	background-color: var(--tertiary-color);
+	transition: all 0.3s ease-in-out; /*Geçişler: ease-in-out - specifies a transition effect with a slow start and end*/
+}
+nav ul li a:hover:before {
+	/*Hover selector fareyi üzerinde gezdirdiğimizde olan stildir*/
+	width: 100%;
+}
+nav ul li a:focus {
+	/*linklere odaklandığındaki(seçtiğindeki) giriş ve stil alanı*/
+	background-color: var(--tertiary-color);
+	opacity: 0.2px;
+	border-radius: 20px;
+	box-shadow: inset 0 5px 5px rgba(255, 250, 250, 0.5);
+}
+nav ul li a:focus::before {
+	width: 0%;
+}
+.search-btn {
+	display: flex;
+}
+.inputText {
+	outline: none;
+	border: 1px solid var(--tertiary-color);
+	border-radius: 2rem 0 0 2rem;
+	padding: 0.3rem 1rem;
+	font-size: 1rem;
+	color: white;
+	background-color: var(--tertiary-color);
+	box-shadow: inset 0 5px 10px #78c3;
+	/*inset: Optional. Changes the shadow from an outer shadow (outset) to an inner shadow*/
+}
+.inputText::placeholder {
+	color: whitesmoke;
+}
+.search-btn button {
+	background-color: #c6deff;
+	box-shadow: inset 0 5px 10px #78c3;
+	padding: 0.2rem 0.5rem;
+	border-radius: 0 2rem 2rem 0;
+	color: #560319;
+	font-size: 1rem;
+	outline: none;
+	border: 1px solid var(--tertiary-color);
+}
+.container {
+	margin: auto; /*Yatay ortalamak*/
+	width: 100%; /*Genişlik ayarına göre kart sığdı*/
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap; /*flex öğelerinin sarılıp sarılmayacağını yan yana dizilmeyi belirtir*/
+}
+.movie {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 5);
+	width: 250px;
+	background-color: var(--quaternary-color);
+	color: whitesmoke;
+	margin: 1rem;
+	border-radius: 5px;
+	box-sizing: border-box;
+	overflow: hidden; /* Bir alana sığmama durumunu overflow kontrol eder, hidden: taşma kırpılır ve içeriğin bir kısmı görünmez*/
+	position: relative; /*Kullanılan konumlandırma yöntemi-> normal konumlandırma*/
+}
+.movie .poster {
+	width: 100%;
+	height: 280px;
+}
+.movie-details {
+	display: flex;
+	flex-direction: column; /*Başlık ve derecelendirme satır satır alt alta sıralanması için*/
+	justify-content: center; /*Align the flex items at the center of the container*/
+	align-items: center; /*öğeler konteynerın ortasına yerleştirilir*/
+}
+.movie-details .box {
+	width: 100%;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.movie-details .title {
+	width: 160px;
+	text-align: start;
+}
+.movie-details .overview {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	max-height: 100%;
+	background-color: var(--secondary-color);
+	opacity: 0.936;
+	color: var(--quaternary-color);
+	box-sizing: border-box;
+	padding: 1rem;
+	transition: all 0.4s ease-in-out;
+	overflow-y: auto; /*taşmayı y eksenine göre otomatik ayarla*/
+	transform: translateY(101%);
+}
+.movie-details:hover .overview {
+	transform: translateY(0%);
+}
+.rating {
+	background-color: var(--secondary-color);
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	font-weight: bold;
+	border: 1px solid var(--primary-color);
+	box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.5);
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
