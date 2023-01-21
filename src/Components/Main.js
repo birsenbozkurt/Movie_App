@@ -7,6 +7,7 @@ let arr = ["Popular", "Theatre", "Kids", "Drama", "Comedie"];
 const Main = () => {
 	const [moviedata, setData] = useState([]);
 	const [url_set, setUrl] = useState(url);
+	const [search, setSearch] = useState();
 	//başlangıçta en popüler filmler url değerini aldı.
 
 	useEffect(() => {
@@ -37,6 +38,13 @@ const Main = () => {
 		}
 		setUrl(url);
 	};
+	const searchMovie = (evt) => {
+		if (evt.key == "Enter") {
+			url = base_url + "/search/movie?api_key=6271e7f0da98b9d66afcd07c890d72b6&query=" + search;
+			setUrl(url);
+			setSearch("");
+		}
+	};
 	return (
 		<>
 			<div className="header">
@@ -61,7 +69,16 @@ const Main = () => {
 				</nav>
 				<form>
 					<div className="search-btn">
-						<input type="text" placeholder="Enter Movie Name" className="inputText" />
+						<input
+							type="text"
+							placeholder="Enter Movie Name"
+							className="inputText"
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
+							value={search}
+							onKeyPress={searchMovie}
+						/>
 						<button>
 							<i class="fas fa-search"></i>
 						</button>
@@ -70,7 +87,7 @@ const Main = () => {
 			</div>
 			<div className="container">
 				{moviedata.length == 0 ? (
-					<p className="notfound">Not Found</p>
+					<p className="notfound">Not Found...</p>
 				) : (
 					moviedata.map((res, pos) => {
 						return <Card info={res} key={pos} />;
